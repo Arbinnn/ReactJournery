@@ -10,7 +10,9 @@ function Github() {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
     return (
-        <div>Github followers : {data.followers}</div>
+        <div>Github followers : {data.followers}
+        <img src={data.avatar_url} alt="Avatar" />
+        </div>
     )
 }
 
