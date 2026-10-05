@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+
 import './App.css'
+import UserContextProvider from './context/UserContextProvider.jsx'
+import Login from './components/login.jsx'
+import Profile from './components/profile.jsx'
 
 function App() {
   return(
-    <div>
+    <UserContextProvider>
       <h1>hello</h1>
-    </div>
+      <Login />
+      <Profile/>
+    </UserContextProvider>
   )
 }
 
