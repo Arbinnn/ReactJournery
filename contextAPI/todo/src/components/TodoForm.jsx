@@ -3,25 +3,25 @@ import { useTodoContext } from '../contexts';
 
 function TodoForm() {
     
-    const [oneTodo, setoneTodo] = useState("")
+    const [inputText, setInputText] = useState("")
     const {addTodo} = useTodoContext()
 
-    const add = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        if ( !oneTodo ) return;
+        if ( !inputText ) return;
 
-        addTodo({text:oneTodo, completed:false})
-        setoneTodo("")
+        addTodo({text:inputText, completed:false})
+        setInputText("")
     }
     return (
-        <form onSubmit={add} className="flex">
+        <form onSubmit={handleSubmit} className="flex">
             <input
                 type="text"
                 placeholder="Write Todo..."
                 className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
-                value={oneTodo}
-                onChange = { (e) => setoneTodo(e.target.value)}
+                value={inputText}
+                onChange = { (e) => setInputText(e.target.value)}
             />
             <button type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
                 Add

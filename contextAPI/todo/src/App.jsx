@@ -7,32 +7,32 @@ import TodoItem from './components/TodoItem'
 function App() {
   const [todos, setTodos] = useState([])
 
-  const addTodo = (todo) => {
-    setTodos((a => [...a,{id:Date.now(), ...todo}]))
+  const addTodo = (newTodo) => {
+    setTodos((prevTodos) => [...prevTodos, { id: Date.now(), ...newTodo }])
   }
 
-  const updateTodo = (id,todo) => {
-    setTodos( (prev) => prev.map((prevTodo) => (prevTodo.id === id ? todo: prevTodo)))
+  const updateTodo = (id, updatedTodo) => {
+    setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? updatedTodo : todo)))
   }
 
   const deleteTodo = (id) => {
-    setTodos ( (prev) => prev.filter((a) => a.id !== id))
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
   }
 
   const toggleTodo = (id) => {
-    setTodos( (prev) => prev.map((a) => a.id === id ? {...a, completed : !a.completed} : a))
+    setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)))
   }
 
-  useEffect( () => {
-    const todoLocal = JSON.parse(localStorage.getItem("key"))
-    if ( todos && todos.length > 0){
-      setTodos(todoLocal)
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos"))
+    if (storedTodos && storedTodos.length > 0) {
+      setTodos(storedTodos)
     }
   }, [])
 
-  useEffect ( ()=> {
-    localStorage.setItem( "key",JSON.stringify(todos))
-  },[todos])
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   return (
     <>
@@ -46,9 +46,9 @@ function App() {
                     </div>
                     <div className="flex flex-wrap gap-y-3">
                         {/*Loop and Add TodoItem here */}
-                        {todos.map ((a) => (
-                          <div key= {a.id} className='w-full'>
-                              <TodoItem todo={a}/>
+                        {todos.map((todo) => (
+                          <div key={todo.id} className='w-full'>
+                              <TodoItem todo={todo}/>
                           </div>
                         ))}
                     </div>
