@@ -12,8 +12,9 @@ function App() {
   return (
     <>
       <h1>Learn with react</h1>
+        <Todos />
       <AddTodo />
-      <Todos />
+    
     </>
   )
 }
